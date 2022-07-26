@@ -8,6 +8,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.ashish.kafkaavro.Interface.IKafkaConstants;
 import org.ashish.kafkaavro.consume.ConsumeRecords;
 import org.ashish.kafkaavro.produce.ProduceRecords;
+import java.util.UUID;
 
 import java.util.concurrent.ExecutionException;
 
@@ -21,17 +22,18 @@ public class StartJob {
      */
     public static void main(String[] args) {
 
-        runProducer();
-        runConsumer();
+       //runProducer();
+       runConsumer();
 
     }
 
     public static void runProducer() {
 
-        Producer<Long, String> producer = ProduceRecords.produceRecords();
+        Producer<String, String> producer = ProduceRecords.produceRecords();
 
         for (int index = 0; index < IKafkaConstants.MESSAGE_COUNT; index++) {
-            final ProducerRecord<Long, String> record = new ProducerRecord<Long, String>(IKafkaConstants.TOPIC_NAME,
+            final ProducerRecord<String, String> record = new ProducerRecord<String, String>(IKafkaConstants.TOPIC_NAME
+                    ,UUID.randomUUID().toString(),
                     "This is record " + index);
             try {
                 RecordMetadata metadata = producer.send(record).get();
@@ -45,12 +47,12 @@ public class StartJob {
     }
 
     public static void runConsumer() {
-        Consumer<Long, String> consumer = ConsumeRecords.consumeRecords();
+        Consumer<String, String> consumer = ConsumeRecords.consumeRecords();
 
         int noMessageToFetch = 0;
 
         while (true) {
-            final ConsumerRecords<Long, String> consumerRecords = consumer.poll(1000);
+            final ConsumerRecords<String, String> consumerRecords = consumer.poll(1000);
             if (consumerRecords.count() == 0) {
                 noMessageToFetch++;
                 if (noMessageToFetch > IKafkaConstants.MAX_NO_MESSAGE_FOUND_COUNT)

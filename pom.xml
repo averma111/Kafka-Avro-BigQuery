@@ -18,6 +18,8 @@
   </properties>
   <dependencies>
 
+
+
     <!-- logging -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -73,6 +75,7 @@
 
 
   </dependencies>
+
   <repositories>
     <repository>
       <id>confluent</id>

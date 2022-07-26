@@ -1,4 +1,4 @@
-package org.ashish.kafkaavro.util;
+package org.ashish.kafkaavro.serde;
 
 import org.apache.kafka.common.serialization.Serializer;
 import org.ashish.kafkaavro.model.CustomerObject;
