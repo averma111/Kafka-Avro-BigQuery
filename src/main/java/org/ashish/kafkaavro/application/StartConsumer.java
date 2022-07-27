@@ -2,7 +2,7 @@ package org.ashish.kafkaavro.application;
 
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
-import org.ashish.kafkaavro.Interface.IKafkaConstants;
+import org.ashish.kafkaavro.config.ConfigProperties;
 import org.ashish.kafkaavro.consume.ConsumeRecords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +21,7 @@ public class StartConsumer {
             final ConsumerRecords<String, String> consumerRecords = consumer.poll(1000);
             if (consumerRecords.count() == 0) {
                 noMessageToFetch++;
-                if (noMessageToFetch > IKafkaConstants.MAX_NO_MESSAGE_FOUND_COUNT)
+                if (noMessageToFetch > Integer.parseInt(ConfigProperties.getInstance().getProperty("MAX_NO_MESSAGE_FOUND_COUNT")))
                     break;
                 else
                     continue;
