@@ -1,8 +1,6 @@
 package org.ashish.kafkaavro.model;
 
 public class CustomerObject {
-
-    private final static  long serialVersionUID = 1L;
     private String Id;
     private String Name;
 
