@@ -111,7 +111,7 @@
         <version>3.18.0</version>
         <configuration>
           <logClasspath>true</logClasspath>
-          <mainClass>org.ashish.kafkaavro.StartJob</mainClass>
+          <mainClass>org.ashish.kafkaavro.application.StartJob</mainClass>
         </configuration>
       </plugin>
 
