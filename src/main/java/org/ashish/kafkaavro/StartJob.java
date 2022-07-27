@@ -8,6 +8,9 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.ashish.kafkaavro.Interface.IKafkaConstants;
 import org.ashish.kafkaavro.consume.ConsumeRecords;
 import org.ashish.kafkaavro.produce.ProduceRecords;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.UUID;
 
 import java.util.concurrent.ExecutionException;
@@ -17,6 +20,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class StartJob {
 
+    public static  final Logger LOGGER = LoggerFactory.getLogger(StartJob.class);
     /**
      * A main() so we can easily run these routing rules in our IDE
      */
@@ -28,20 +32,17 @@ public class StartJob {
     }
 
     public static void runProducer() {
-
         Producer<String, String> producer = ProduceRecords.produceRecords();
-
         for (int index = 0; index < IKafkaConstants.MESSAGE_COUNT; index++) {
             final ProducerRecord<String, String> record = new ProducerRecord<String, String>(IKafkaConstants.TOPIC_NAME
-                    ,UUID.randomUUID().toString(),
-                    "This is record " + index);
+                    ,UUID.randomUUID().toString(),String.valueOf(index));
             try {
                 RecordMetadata metadata = producer.send(record).get();
-                System.out.println("Record sent with key " + index + " to partition " + metadata.partition()
+                LOGGER.info("Record sent with key " + index + " to partition " + metadata.partition()
                         + " with offset " + metadata.offset());
             } catch (ExecutionException | InterruptedException e) {
-                System.out.println("Error in sending record");
-                System.out.println(e);
+                LOGGER.error("Error in sending record");
+                LOGGER.error(String.valueOf(e));
             }
         }
     }
@@ -62,10 +63,10 @@ public class StartJob {
             }
 
             consumerRecords.forEach(record -> {
-                System.out.println("Record Key " + record.key());
-                System.out.println("Record value " + record.value());
-                System.out.println("Record partition " + record.partition());
-                System.out.println("Record offset " + record.offset());
+                LOGGER.info("Record Key " + record.key());
+                LOGGER.info("Record value " + record.value());
+                //System.out.println("Record partition " + record.partition());
+                //System.out.println("Record offset " + record.offset());
             });
             consumer.commitAsync();
         }

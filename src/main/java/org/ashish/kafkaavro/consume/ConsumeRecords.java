@@ -4,12 +4,16 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.ashish.kafkaavro.Interface.IKafkaConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 import java.util.Collections;
 import java.util.Properties;
 
 public class ConsumeRecords {
+
+    public final static Logger LOGGER = LoggerFactory.getLogger(ConsumeRecords.class);
 
     public static Consumer<String, String> consumeRecords() {
         final Properties props = new Properties();
@@ -24,7 +28,7 @@ public class ConsumeRecords {
 
         final Consumer<String, String> consumer = new KafkaConsumer<>(props);
         consumer.subscribe(Collections.singletonList(IKafkaConstants.TOPIC_NAME));
-
+        LOGGER.info("Consumer object is created");
         return consumer;
 
     }
