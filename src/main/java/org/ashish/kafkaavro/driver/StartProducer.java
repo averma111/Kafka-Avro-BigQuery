@@ -1,4 +1,4 @@
-package org.ashish.kafkaavro.application;
+package org.ashish.kafkaavro.driver;
 
 import com.github.javafaker.Faker;
 import org.apache.kafka.clients.producer.Producer;

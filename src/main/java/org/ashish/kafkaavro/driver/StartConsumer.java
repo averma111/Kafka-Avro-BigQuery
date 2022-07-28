@@ -1,4 +1,4 @@
-package org.ashish.kafkaavro.application;
+package org.ashish.kafkaavro.driver;
 
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

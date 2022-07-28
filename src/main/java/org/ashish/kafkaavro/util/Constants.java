@@ -8,6 +8,8 @@ public class Constants {
     public static final String EVENT_SOURCE = "event_source";
     public static final String BATCH_JOB_INITIATION_TIME = "batch_job_initiation_time";
 
+    public static final String IS_JOB_FAILED = "is_job_failed";
+
 
     public static final String SPARK_STREAMING_CHECKPOINT_LOCATION = "spark_streaming_checkpoint_location";
     public static final String SPARK_STREAMING_MAX_RATE_PER_PARTITION = "spark.streaming.kafka.maxRatePerPartition";
